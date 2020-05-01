@@ -26,11 +26,11 @@ def logit():
         "color": color
     }
     data = json.dumps(data)
-    requests.post("http://localhost:3000/logs", data=data,
+    requests.post("http://35.168.69.196:3000/logs", data=data,
                  headers={"content-type": "application/json"})
     
     return "200"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=80)
 

@@ -42,7 +42,7 @@ export default {
   methods: {
     async startLogging() {
       let recvdata = await axios.get(
-        `http://127.0.0.1:3000/logs?username=${this.getUser.username}`
+        `http://35.168.69.196:3000/logs?username=${this.getUser.username}`
       );
       recvdata = recvdata.data;
 
@@ -72,7 +72,7 @@ export default {
       };
       console.log("filter is:", this.messagesDisplayed);
       await axios.put(
-        `http://127.0.0.1:3000/users/${this.getUser.id}/`,
+        `http://35.168.69.196:3000/users/${this.getUser.id}/`,
         newData
       );
       this.messages = []
