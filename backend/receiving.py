@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, abort
 import json
 import re
 import requests
+from flask_cors import CORS,cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/")
@@ -12,6 +14,7 @@ def main():
 
 
 @app.route("/logs", methods=["POST"])
+@cross_origin()
 def logit():
     # try:
     username = request.get_json()["username"]
@@ -26,11 +29,55 @@ def logit():
         "color": color
     }
     data = json.dumps(data)
-    requests.post("http://35.168.69.196:3000/logs", data=data,
+    # requests.post("http://35.168.69.196:3000/logs", data=data,
+    #              headers={"content-type": "application/json"})
+    requests.post("http://127.0.0.1:3000/logs", data=data,
                  headers={"content-type": "application/json"})
     
     return "200"
 
+@app.route("/checkUser", methods=["POST"])
+@cross_origin()
+def checkUser():
+    # try:
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+
+    data = requests.get("http://127.0.0.1:3000/users?username={}&password={}".format(username,password))
+    data.encoding = 'utf-8' # Optional: requests infers this internally
+    data = (json.loads(data.text))
+    return(json.dumps(data))
+
+
+@app.route("/addUser", methods=["POST"])
+@cross_origin()
+def addUser():
+    # try:
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+    restrictLogs = request.get_json()["restrictLogs"]
+
+    data = {
+        "username": username,
+        "password": password,
+        "restrictLogs": restrictLogs
+    }
+    data = json.dumps(data)
+    requests.post("http://127.0.0.1:3000/users", data=data,
+                 headers={"content-type": "application/json"})
+    return("200")
+
+@app.route("/getLogs", methods=["POST"])
+@cross_origin()
+def getLogs():
+    # try:
+    username = request.get_json()["username"]
+    data = requests.get("http://127.0.0.1:3000/logs?username={}".format(username))
+    data.encoding = 'utf-8' # Optional: requests infers this internally
+    data = (json.loads(data.text))
+    return(json.dumps(data))
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=80)
+    # app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(debug=True)
 
