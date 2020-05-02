@@ -15,10 +15,15 @@
         <br />
         <br />
         <div class="d-flex justify-content-center headinginfo">
-          <h4>
-            Just include the above code anywhere in your code, along with your username and password to create a checkpoint which will be
-            displayed here.
-          </h4>
+          <div>
+            <h4>
+              Just include the above code anywhere in your code, along with your username and password to create a checkpoint which will be
+              displayed here.
+            </h4>
+            <h5>
+              <a href="https://textsaver.flap.tv/lists/3cz1">Click me for the code</a>
+            </h5>
+          </div>
         </div>
 
         <br />
@@ -52,7 +57,7 @@ export default {
   background-color: white;
   padding-top: 20px;
 }
-.headinginfo{
+.headinginfo {
   width: 300px;
 }
 #apiheader {

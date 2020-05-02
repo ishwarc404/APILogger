@@ -7,24 +7,27 @@
         </v-chip>
         <br />
         <br />
-        <h2>
+        <h3>
           <b>LOGIN</b>
-        </h2>
+        </h3>
         <v-text-field label="USERNAME" v-model="loginuserData.username" outlined></v-text-field>
         <v-text-field label="PASSWORD" v-model="loginuserData.password" outlined type="password"></v-text-field>
-        <v-btn large color="black" style="color:white;" @click="this.enterLogs">ENTER!</v-btn>
+        <v-btn medium color="black" style="color:white;" @click="this.enterLogs">ENTER!</v-btn>
         <br />
         <br />
         <hr />
-        <h2>
+        <h3>
           <b>CREATE NEW</b>
-        </h2>
+        </h3>
         <v-text-field label="USERNAME" v-model="newuserData.username" outlined></v-text-field>
         <v-text-field label="PASSWORD" v-model="newuserData.password" outlined type="password"></v-text-field>
-        <v-btn large color="black" style="color:white;" @click="this.createnewuser">CREATE!</v-btn>
+        <v-btn medium color="black" style="color:white;" @click="this.createnewuser">CREATE!</v-btn>
         <br />
         <br />
-        <v-btn large color="black" style="color:white;" @click="this.viewUsage">HOW TO USE</v-btn>
+        <v-btn medium color="black" style="color:white;" @click="this.viewUsage">HOW TO USE</v-btn>
+        <br />
+        <br />
+        <h6>Created by Ishwar Choudhary :)</h6>
       </div>
     </div>
   </v-app>

@@ -4,8 +4,7 @@
       "id": 1,
       "username": "ishwar",
       "password": "test",
-      "restrictLogs": [
-      ]
+      "restrictLogs": []
     }
   ],
   "logs": [
@@ -64,6 +63,20 @@
       "message": "this is a nice message",
       "color": "yellow",
       "id": 8
+    },
+    {
+      "username": "ishwar",
+      "password": "test",
+      "message": "this is a nice message",
+      "color": "yellow",
+      "id": 9
+    },
+    {
+      "username": "ishwar",
+      "password": "test",
+      "message": "this is a nice message",
+      "color": "yellow",
+      "id": 10
     }
   ]
 }
