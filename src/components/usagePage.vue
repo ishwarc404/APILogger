@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="d-flex justify-content-center loginDiv" >
+    <div class="d-flex justify-content-center loginDiv">
       <div>
         <v-chip color="black" label large text-color="white">
           <p id="apiheader">USAGE</p>
@@ -13,6 +13,14 @@
         <br />
         <img :src="image" width="300px" />
         <br />
+        <br />
+        <div class="d-flex justify-content-center headinginfo">
+          <h4>
+            Just include the above code anywhere in your code, along with your username and password to create a checkpoint which will be
+            displayed here.
+          </h4>
+        </div>
+
         <br />
         <v-btn large color="black" style="color:white;" @click="this.goHome">GO HOME</v-btn>
         <hr />
@@ -43,6 +51,9 @@ export default {
   flex: 0%;
   background-color: white;
   padding-top: 20px;
+}
+.headinginfo{
+  width: 300px;
 }
 #apiheader {
   font-size: 50px;

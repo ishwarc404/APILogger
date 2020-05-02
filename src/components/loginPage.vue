@@ -7,50 +7,24 @@
         </v-chip>
         <br />
         <br />
-        <h1>
+        <h2>
           <b>LOGIN</b>
-        </h1>
-        <v-text-field
-          label="USERNAME"
-          v-model="loginuserData.username"
-          outlined
-        ></v-text-field>
-        <v-text-field
-          label="PASSWORD"
-          v-model="loginuserData.password"
-          outlined
-        ></v-text-field>
-        <v-btn large color="black" style="color:white;" @click="this.enterLogs"
-          >ENTER!</v-btn
-        >
+        </h2>
+        <v-text-field label="USERNAME" v-model="loginuserData.username" outlined></v-text-field>
+        <v-text-field label="PASSWORD" v-model="loginuserData.password" outlined type="password"></v-text-field>
+        <v-btn large color="black" style="color:white;" @click="this.enterLogs">ENTER!</v-btn>
         <br />
         <br />
         <hr />
-        <h1>
+        <h2>
           <b>CREATE NEW</b>
-        </h1>
-        <v-text-field
-          label="USERNAME"
-          v-model="newuserData.username"
-          outlined
-        ></v-text-field>
-        <v-text-field
-          label="PASSWORD"
-          v-model="newuserData.password"
-          outlined
-        ></v-text-field>
-        <v-btn
-          large
-          color="black"
-          style="color:white;"
-          @click="this.createnewuser"
-          >CREATE!</v-btn
-        >
+        </h2>
+        <v-text-field label="USERNAME" v-model="newuserData.username" outlined></v-text-field>
+        <v-text-field label="PASSWORD" v-model="newuserData.password" outlined type="password"></v-text-field>
+        <v-btn large color="black" style="color:white;" @click="this.createnewuser">CREATE!</v-btn>
         <br />
         <br />
-        <v-btn large color="black" style="color:white;" @click="this.viewUsage"
-          >HOW TO USE</v-btn
-        >
+        <v-btn large color="black" style="color:white;" @click="this.viewUsage">HOW TO USE</v-btn>
       </div>
     </div>
   </v-app>
@@ -68,13 +42,13 @@ export default {
     return {
       loginuserData: {
         username: null,
-        password: null,
+        password: null
       },
       newuserData: {
         username: null,
         password: null,
-        restrictLogs: [],
-      },
+        restrictLogs: []
+      }
     };
   },
   methods: {
@@ -108,8 +82,8 @@ export default {
     },
     viewUsage() {
       this.$router.push("usage");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -120,7 +94,7 @@ export default {
   padding-top: 10px;
 }
 #apiheader {
-  font-size: 40px;
+  font-size: 30px;
   padding-top: 10%;
   font-weight: bold;
   flex: 0%;
