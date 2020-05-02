@@ -77,6 +77,26 @@ def getLogs():
     data = (json.loads(data.text))
     return(json.dumps(data))
 
+@app.route("/clearLogs", methods=["POST"])
+@cross_origin()
+def clearLogs():
+    # try:
+    ID = request.get_json()["id"]
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+    restrictLogs = request.get_json()["restrictLogs"]
+
+    data = {
+        "id":ID,
+        "username": username,
+        "password": password,
+        "restrictLogs": restrictLogs
+    }
+    data = json.dumps(data)
+    requests.put("http://127.0.0.1:3000/users/{}".format(ID), data=data,
+                 headers={"content-type": "application/json"})
+    return("200")
+
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', debug=True, port=80)
     app.run(debug=True)
