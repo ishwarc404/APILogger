@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, abort
 import json
 import re
 import requests
-from flask_cors import CORS,cross_origin
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
@@ -25,33 +25,37 @@ def logit():
     data = {
         "username": username,
         "password": password,
-        "message": message,
+        "message": message[:200],
         "color": color
     }
     data = json.dumps(data)
     # requests.post("http://35.168.69.196:3000/logs", data=data,
     #              headers={"content-type": "application/json"})
     requests.post("http://127.0.0.1:3000/logs", data=data,
-                 headers={"content-type": "application/json"})
-    
-    return "200"
+                  headers={"content-type": "application/json"})
+
+    return "", 200
+
 
 @app.route("/checkUser", methods=["POST"])
 @cross_origin()
 def checkUser():
     # try:
+
     username = request.get_json()["username"]
     password = request.get_json()["password"]
 
-    data = requests.get("http://127.0.0.1:3000/users?username={}&password={}".format(username,password))
-    data.encoding = 'utf-8' # Optional: requests infers this internally
+    data = requests.get(
+        "http://127.0.0.1:3000/users?username={}".format(username))
+    data.encoding = 'utf-8'  # Optional: requests infers this internally
+
     data = (json.loads(data.text))
     return(json.dumps(data))
 
 
-@app.route("/addUser", methods=["POST"])
+@app.route("/createUser", methods=["POST"])
 @cross_origin()
-def addUser():
+def createUser():
     # try:
     username = request.get_json()["username"]
     password = request.get_json()["password"]
@@ -62,20 +66,30 @@ def addUser():
         "password": password,
         "restrictLogs": restrictLogs
     }
-    data = json.dumps(data)
-    requests.post("http://127.0.0.1:3000/users", data=data,
-                 headers={"content-type": "application/json"})
-    return("200")
+
+    checkData = requests.post("http://127.0.0.1/checkUser", json=data)
+
+    checkData = json.loads(checkData.content)
+
+    if(len(checkData) == 0):
+        requests.post("http://127.0.0.1:3000/users", data=json.dumps(data),
+                      headers={"content-type": "application/json"})
+        return "", 200
+    else:
+        return "", 400
+
 
 @app.route("/getLogs", methods=["POST"])
 @cross_origin()
 def getLogs():
     # try:
     username = request.get_json()["username"]
-    data = requests.get("http://127.0.0.1:3000/logs?username={}".format(username))
-    data.encoding = 'utf-8' # Optional: requests infers this internally
+    data = requests.get(
+        "http://127.0.0.1:3000/logs?username={}".format(username))
+    data.encoding = 'utf-8'  # Optional: requests infers this internally
     data = (json.loads(data.text))
     return(json.dumps(data))
+
 
 @app.route("/clearLogs", methods=["POST"])
 @cross_origin()
@@ -87,7 +101,7 @@ def clearLogs():
     restrictLogs = request.get_json()["restrictLogs"]
 
     data = {
-        "id":ID,
+        "id": ID,
         "username": username,
         "password": password,
         "restrictLogs": restrictLogs
@@ -95,9 +109,9 @@ def clearLogs():
     data = json.dumps(data)
     requests.put("http://127.0.0.1:3000/users/{}".format(ID), data=data,
                  headers={"content-type": "application/json"})
-    return("200")
+    return "", 200
+
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, port=80)
-    # app.run(debug=True)
-
+    # app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(debug=True)

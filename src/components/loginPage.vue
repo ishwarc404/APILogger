@@ -65,6 +65,8 @@ export default {
         var check = await this.checkUser(this.loginuserData);
         if (check) {
           this.$router.push("logs");
+        } else {
+          alert("Invalid Credentials!");
         }
       }
     },
@@ -74,12 +76,13 @@ export default {
         this.newuserData.password != null
       ) {
         var check = await this.createUser(this.newuserData);
+        console.log("here", check);
         if (check) {
           this.loginuserData.username = this.newuserData.username;
           this.loginuserData.password = this.newuserData.password;
           this.enterLogs();
         } else {
-          alert("username unavailable");
+          alert("Uername unavailable :(");
         }
       }
     },

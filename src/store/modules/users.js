@@ -22,20 +22,21 @@ const actions = {
     }
   },
   async createUser({ commit }, newuserDetails) {
-    let userData = await axios.post(
-      "http://34.236.75.17/checkUser",
-      newuserDetails
-    );
-    userData = userData.data;
-    if (userData.length == 0) {
-      //we need to add to db
-      console.log(newuserDetails);
-      await axios.post("http://34.236.75.17/addUser", newuserDetails);
+    try {
+      await axios.post(
+        "http://34.236.75.17/createUser",
+        // "http://127.0.0.1:5000/createUser",
+        newuserDetails
+      );
       commit("original", newuserDetails);
       return true;
-    } else {
-      return false;
+    } catch (error) {
+      // Error
+      if (error.response) {
+        return false;
+      }
     }
+
   },
   async clearUser({ commit }) {
     let userData = { username: null, password: null, restrictLogs: [] };
