@@ -64,6 +64,9 @@ export default {
       // let recvdata = await axios.get(
       //   `http://192.168.0.9:3000/logs?username=${this.getUser.username}`
       // );
+      if (this.getUser.username == null) {
+        return;
+      }
       let data = {
         username: this.getUser.username
       };
@@ -87,7 +90,7 @@ export default {
         }
       }
 
-      setTimeout(this.startLogging, 100);
+      setTimeout(this.startLogging, 500);
     },
     async clearLogs() {
       let newData = {
@@ -101,10 +104,7 @@ export default {
       //   "http://127.0.0.1:5000/clearLogs",
       //   newData
       // );
-            await axios.post(
-        "http://34.236.75.17/clearLogs",
-        newData
-      );
+      await axios.post("http://34.236.75.17/clearLogs", newData);
       this.messages = [];
     }
   },
